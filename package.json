@@ -1,7 +1,7 @@
 {
   "name": "node_movies",
   "version": "1.0.0",
-  "description": "",
+  "description": "API de filmes utilizando Nodejs.",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
@@ -12,7 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

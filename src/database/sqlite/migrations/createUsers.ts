@@ -7,6 +7,5 @@ export const createUsers = `
     avatar VARCHAR NULL,
     created_at TIMESTAMP DEFAULT CURRENT_STAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_STAMP
-    
   )
 `;

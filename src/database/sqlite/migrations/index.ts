@@ -1,4 +1,4 @@
-import { sqliteConnection } from "../..";
+import { sqliteConnection } from "../index";
 import { createUsers } from "./createUsers";
 
 export async function migrationsRun() {

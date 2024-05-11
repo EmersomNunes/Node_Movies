@@ -30,7 +30,7 @@ export class UserController {
   };
 
   async update(req: Request, res: Response) {
-    try{
+    try {
       const { name, email, password, old_password } = req.body;
       const { id } = req.params;
 
@@ -40,7 +40,7 @@ export class UserController {
         "SELECT * FROM users WHERE id = (?)", [id]
       );
 
-      if(!user) {
+      if (!user) {
         throw new ErrorApp("Usuário não encontrado");
       }
 
@@ -48,21 +48,21 @@ export class UserController {
         "SELECT * FROM users WHERE email = (?)", [email]
       );
 
-      if(userWithUpdatedMail && userWithUpdatedMail.id !== user.id) {
+      if (userWithUpdatedMail && userWithUpdatedMail.id !== user.id) {
         throw new ErrorApp("Este e-mail já está cadastrado.")
       }
 
       user.name = name ?? user.name;
       user.email = email ?? user.email;
 
-      if(password && !old_password) {
+      if (password && !old_password) {
         throw new ErrorApp("Informe sua senha antiga para prosseguir");
       }
 
-      if(password && old_password) {
+      if (password && old_password) {
         const checkOldPassword = await compare(old_password, user.password);
 
-        if(!checkOldPassword){
+        if (!checkOldPassword) {
           throw new ErrorApp("A senha antiga está incorreta.");
         }
 
@@ -80,9 +80,33 @@ export class UserController {
 
       return res.json("Usuário atualizado com sucesso");
 
-    }catch(e) {
+    } catch (e) {
       console.log(e);
       res.status(400).json();
     }
   }
+
+  async show(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+
+      const database = await sqliteConnection();
+
+      const user = await database.get(
+        "SELECT * FROM users WHERE id = ?", [id]
+      );
+
+      if (!user) {
+        throw new ErrorApp("Usuário não encontrado");
+      }
+
+      return res.json({
+        name: user.name,
+        avatar: user.avatar,
+        created_at: user.created_at
+      });
+    } catch (e) {
+      return res.json(e)
+    };
+  };
 };

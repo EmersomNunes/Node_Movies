@@ -5,7 +5,7 @@ export const createUsers = `
     email VARCHAR,
     password VARCHAR,
     avatar VARCHAR NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_STAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_STAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )
 `;

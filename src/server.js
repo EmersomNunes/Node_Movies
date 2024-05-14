@@ -1,8 +1,8 @@
-import express, { NextFunction, Request, Response, json, response } from "express";
-import { routes } from "./Routes";
-import "express-async-errors";
-import { migrationsRun } from "./database/sqlite/migrations";
-import { ErrorApp } from "../utils/ErrorApp";
+const express = require("express");
+const routes = require("./Routes")
+"express-async-errors";
+const migrationsRun = require("./database/sqlite/migrations")
+const ErrorApp = require("../utils/ErrorApp")
 
 const app = express();
 app.use(express.json());
@@ -11,7 +11,7 @@ migrationsRun();
 
 app.use(routes);
 
-app.use((error: ErrorApp, request: Request, response: Response, next: NextFunction) => {
+app.use((error, request, response, next) => {
   if(error instanceof ErrorApp) {
     return response.status(error.statusCode).json({
       status: "error",
@@ -27,5 +27,5 @@ app.use((error: ErrorApp, request: Request, response: Response, next: NextFuncti
   });
 })
 
-const PORT: number = 3000;
+const PORT = 3000;
 app.listen(PORT, () => console.log(`Server is running in Port ${PORT}`));

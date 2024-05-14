@@ -1,4 +1,4 @@
-export const createUsers = `
+const createUsers = `
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR,
@@ -9,3 +9,5 @@ export const createUsers = `
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )
 `;
+
+module.exports = createUsers;

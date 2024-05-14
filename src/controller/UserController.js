@@ -1,14 +1,13 @@
-import { Request, Response } from "express";
-import { sqliteConnection } from "../database/sqlite/index";
-import { compare, hash } from "bcryptjs";
-import { ErrorApp } from "../../utils/ErrorApp";
-import { Database } from "sqlite";
-export class UserController {
-  async create(req: Request, res: Response) {
+const sqliteConnection = require("../database/sqlite/index")
+const { compare, hash } = require("bcryptjs");
+const ErrorApp = require("../../utils/ErrorApp")
+
+class UserController {
+  async create(req, res) {
     try {
       const { name, email, password } = req.body;
 
-      const database: Database = await sqliteConnection();
+      const database = await sqliteConnection();
 
       const checkEmailExist = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
@@ -29,7 +28,7 @@ export class UserController {
     };
   };
 
-  async update(req: Request, res: Response) {
+  async update(req, res) {
     try {
       const { name, email, password, old_password } = req.body;
       const { id } = req.params;
@@ -86,7 +85,7 @@ export class UserController {
     }
   }
 
-  async show(req: Request, res: Response) {
+  async show(req, res) {
     try {
       const { id } = req.params;
 
@@ -110,3 +109,5 @@ export class UserController {
     };
   };
 };
+
+module.exports = UserController;

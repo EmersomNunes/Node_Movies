@@ -21,7 +21,6 @@
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0",
-    "ts-node": "^10.9.2"
+    "nodemon": "^3.1.0"
   }
 }

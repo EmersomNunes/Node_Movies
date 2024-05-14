@@ -1,5 +1,3 @@
-import { Knex } from "knex";
-
 exports.up = (knex) => knex.schema.createTable("movie_tags", table => {
     table.increments("id");
     table.text("name").notNullable();
